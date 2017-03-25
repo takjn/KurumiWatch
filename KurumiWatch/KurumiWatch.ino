@@ -34,8 +34,7 @@ boolean display_flip = false;
 
 // settings for power saving
 const unsigned long DELAY_SLEEPS[4] = {0, 5000, 10000, 30000};  // sleep (millisec, 0=always on)
-int delay_sleep = 1;
-boolean redraw_flag = false;
+int delay_sleep = 2;
 unsigned long int tick_counter = 0;
 
 // variables for watch
@@ -64,7 +63,6 @@ void sleep() {
 void resume() {
   setPowerManagementMode(PM_NORMAL_MODE);
   tick_counter = 0;
-  redraw_flag = true;
 
   digitalWrite(24, LOW);
   while(digitalRead(2) == LOW);
@@ -104,11 +102,8 @@ void setup() {
 }
 
 void loop() {
-  if (redraw_flag) {
-    oled.ssd1306WriteCmd(0x0af); // display on
-    drawWatch();
-    redraw_flag = false;
-  }
+  oled.ssd1306WriteCmd(0x0af); // display on
+  drawWatch();
   
   if (delay_sleep > 0 & tick_counter > DELAY_SLEEPS[delay_sleep]) {
     sleep();
