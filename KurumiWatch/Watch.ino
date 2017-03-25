@@ -30,7 +30,7 @@ void drawWatch() {
   oled.print((datetime.year+2000));
  
  
-  oled.setCursor(2, 4);
+  oled.setCursor(2, 3);
   oled.set2X();
   if (datetime.hour<10) {
     oled.print("0");
@@ -43,7 +43,7 @@ void drawWatch() {
   oled.print(datetime.min);
 
   oled.set1X();
-  oled.setCursor(107, 5);
+  oled.setCursor(107, 4);
   if (datetime.second<10) {
     oled.print('0');
   }
