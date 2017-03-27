@@ -1,22 +1,17 @@
 const char *DayShortStr[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 const char *MonthShortStr[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-void drawWatch() {
-  rtc_get_time(&datetime); // RTCレジスタ内容をmyRTCに読み出す
+void drawWatch(unsigned char key) {
+  if (key == KEY_SELECT) {
+    mode_current = MODE_MENU;
+    return;
+  }
+  
+  rtc_get_time(&datetime);
 
   // draw date strings
-//  String s = DayShortStr[datetime.weekday];
-//  s += " ";
-//  if (datetime.day<10) {
-//    s += "0";
-//  }
-//  s += datetime.day;
-//  s += " ";
-//  s += MonthShortStr[datetime.mon - 1];
-//  s += " ";
-//  s += (datetime.year);
-//
   oled.setFont(BM_tube9x8);
+  oled.set1X();
   oled.setCursor(0, 0);
   oled.print(DayShortStr[datetime.weekday]);
   oled.setCursor(33, 0);
@@ -29,7 +24,7 @@ void drawWatch() {
   oled.setCursor(89, 0);
   oled.print((datetime.year+2000));
  
- 
+  // draw time strings
   oled.setCursor(2, 3);
   oled.set2X();
   if (datetime.hour<10) {
@@ -52,7 +47,7 @@ void drawWatch() {
   oled.set1X();
   oled.setCursor(0, 7);
   oled.setFont(BM_tube9x8);
-  oled.print("Watch "); 
+//  oled.print("Watch "); 
   oled.print(getTemperature(TEMP_MODE_CELSIUS)); 
   oled.print("°C"); 
 }
