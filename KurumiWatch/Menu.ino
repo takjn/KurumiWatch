@@ -83,10 +83,10 @@ void drawMenuSub(int x) {
   oled.setCursor(0, 3);
   oled.clearToEOL();
   
-  printWithCheckBoundry(x + MARGIN_X * 0, "1");
-  printWithCheckBoundry(x + MARGIN_X * 1, "2");
-  printWithCheckBoundry(x + MARGIN_X * 2, "3");
-  printWithCheckBoundry(x + MARGIN_X * 3, "4");
+  printWithCheckBoundry(x + MARGIN_X * 0, "{");
+  printWithCheckBoundry(x + MARGIN_X * 1, "|");
+  printWithCheckBoundry(x + MARGIN_X * 2, "}");
+  printWithCheckBoundry(x + MARGIN_X * 3, "~");
 
 }
 
