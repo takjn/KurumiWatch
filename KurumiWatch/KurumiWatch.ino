@@ -9,7 +9,7 @@ SSD1306AsciiWire oled;
 #define I2C_ADDRESS 0x3C
 
 // settings for I/O pins
-#define BUZZER_PIN      10          // pin for buzzer
+#define BUZZER_PIN      6           // pin for buzzer
 #define KEY_PREV_PIN    2           // pin for previous button
 #define KEY_SELECT_PIN  3           // pin for select button
 #define KEY_NEXT_PIN    4           // pin for next button
@@ -17,7 +17,7 @@ SSD1306AsciiWire oled;
 
 // settings for buzzer
 const uint8_t buzzer_volumes[4] = { 0, 1, 5, 15 };  // 4 steps volume (0=silence)
-int buzzer_volume = 0;                              // initial volume index
+int buzzer_volume = 3;                              // initial volume index
 
 // settings for display
 const int display_contrasts[4] = { 0, 50, 128, 255 };  // 4 steps contrast
@@ -77,6 +77,7 @@ void setup() {
   oled.clear();
 
   // setup for the power management
+  pinMode(BUZZER_PIN, OUTPUT);
   pinMode(KEY_PREV_PIN, INPUT_PULLUP);
   pinMode(KEY_SELECT_PIN, INPUT_PULLUP);
   pinMode(KEY_NEXT_PIN, INPUT_PULLUP);

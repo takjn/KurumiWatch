@@ -7,7 +7,7 @@ int prev_cursol = -1;
 
 #define MENU_COUNT 4
 #define MENU_TITLE "Setup"
-const char *MENU_SUB_TITLE[MENU_COUNT] = {"Watch", "Contrast", "Sound", "Power Saving"};
+const char *MENU_SUB_TITLE[MENU_COUNT] = {"WATCH", "CONTRAST", "SOUND", "POWER SAVING"};
 
 void drawMenu(unsigned char key) {
   // return if idle
@@ -71,10 +71,10 @@ void drawMenu(unsigned char key) {
     drawMenuSub(CENTER_X - MARGIN_X * cursol);
   }
 
-  oled.setCol(24);
+  oled.setCol(34);
   oled.print("(");
   
-  oled.setCol(84);
+  oled.setCol(74);
   oled.print(")");
   
 }
