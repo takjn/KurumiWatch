@@ -1,5 +1,6 @@
 int cursol = 0;
 int prev_cursol = -1;
+boolean changed = false;
 
 #define CENTER_X 54
 #define MARGIN_X 54
@@ -7,7 +8,7 @@ int prev_cursol = -1;
 
 #define MENU_COUNT 4
 #define MENU_TITLE "Setup"
-const char *MENU_SUB_TITLE[MENU_COUNT] = {"WATCH", "CONTRAST", "SOUND", "POWER SAVING"};
+const char *MENU_SUB_TITLE[MENU_COUNT] = {"BACK", "CONTRAST", "SOUND", "POWER SAVING"};
 
 void drawMenu(unsigned char key) {
   // return if idle
@@ -15,6 +16,7 @@ void drawMenu(unsigned char key) {
   
   // key handler
   if (key == KEY_SELECT) {
+    changed = true;
     if (cursol == 0) {
       // Time
       prev_cursol = -1;
@@ -23,13 +25,17 @@ void drawMenu(unsigned char key) {
       return;
     } else if (cursol == 1) {
       // Contrast
-      // TBD
+      display_contrast++;
+      if (display_contrast>3) display_contrast=0;
+      oled.setContrast(DISPLAY_CONTRASTS[display_contrast]);
     } else if (cursol == 2) {
       // Sound
-      // TBD
+      buzzer_volume++;
+      if (buzzer_volume>3) buzzer_volume=0;
     } else if (cursol == 3) {
       // Power Saving
-      // TBD
+      delay_sleep++;
+      if (delay_sleep>3) delay_sleep = 0;
     }
   }
   else if (key == KEY_NEXT) {
@@ -43,6 +49,7 @@ void drawMenu(unsigned char key) {
       cursol--;
     }
   }
+  beep();
   
   // draw title and subtitle
   oled.setFont(BM_tube9x8);
@@ -68,7 +75,20 @@ void drawMenu(unsigned char key) {
     prev_cursol = cursol;
   }
   else {
-    drawMenuSub(CENTER_X - MARGIN_X * cursol);
+    if (changed) {
+      oled.setCursor(CENTER_X, 3);
+      if (cursol == 1) {
+        // Contrast
+        oled.write(128 + display_contrast);
+      } else if (cursol == 2) {
+        // Sound
+        oled.write(128 + buzzer_volume);
+      } else if (cursol == 3) {
+        // Power Saving
+        oled.write(128 + delay_sleep);
+      }
+      changed=false;
+    }
   }
 
   oled.setCol(34);

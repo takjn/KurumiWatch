@@ -9,20 +9,19 @@ SSD1306AsciiWire oled;
 #define I2C_ADDRESS 0x3C
 
 // settings for I/O pins
-#define BUZZER_PIN      6           // pin for buzzer
+#define BUZZER_PIN      10          // pin for buzzer
 #define KEY_PREV_PIN    2           // pin for previous button
 #define KEY_SELECT_PIN  3           // pin for select button
 #define KEY_NEXT_PIN    4           // pin for next button
 #define BATTERY_CHECK   A0          // pin for battery voltage
 
 // settings for buzzer
-const uint8_t buzzer_volumes[4] = { 0, 1, 5, 15 };  // 4 steps volume (0=silence)
+const uint8_t BUZZER_VOLUMES[4] = { 0, 1, 5, 15 };  // 4 steps volume (0=silence)
 int buzzer_volume = 3;                              // initial volume index
 
 // settings for display
-const int display_contrasts[4] = { 0, 50, 128, 255 };  // 4 steps contrast
-int display_contrast = 0;
-boolean display_flip = false;
+const int DISPLAY_CONTRASTS[4] = { 0, 50, 128, 255 };  // 4 steps contrast
+int display_contrast = 3;
 
 // settings for power saving
 const unsigned long DELAY_SLEEPS[4] = {0, 5000, 10000, 30000};  // sleep (millisec, 0=always on)
@@ -73,7 +72,7 @@ void setup() {
   // initialize SSD1306
   Wire.begin();     
   oled.begin(&Adafruit128x64, I2C_ADDRESS);
-  oled.setContrast(255);
+  oled.setContrast(DISPLAY_CONTRASTS[display_contrast]);
   oled.clear();
 
   // setup for the power management

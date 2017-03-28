@@ -20,7 +20,8 @@ unsigned char key_read(void) {
 }
 
 void beep(void) {
-  if (buzzer_volume != 0)
-    tone(BUZZER_PIN, 1024, buzzer_volumes[buzzer_volume]);
+  if (buzzer_volume != 0) {
+    tone(BUZZER_PIN, 1024, BUZZER_VOLUMES[buzzer_volume]);
+  }
 }
 
