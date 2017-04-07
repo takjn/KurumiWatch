@@ -17,10 +17,7 @@ void drawWatch(unsigned char key) {
   oled.setCursor(0, 0);
   oled.print(DayShortStr[datetime.weekday]);
   oled.setCursor(33, 0);
-  if (datetime.day<10) {
-    oled.print("0");
-  }
-  oled.print(datetime.day);
+  printWithZero(datetime.day);
   oled.setCursor(56, 0);
   oled.print(MonthShortStr[datetime.mon - 1]);
   oled.setCursor(89, 0);
@@ -29,22 +26,13 @@ void drawWatch(unsigned char key) {
   // draw time strings
   oled.setCursor(2, 3);
   oled.set2X();
-  if (datetime.hour<10) {
-    oled.print("0");
-  }
-  oled.print(datetime.hour);
+  printWithZero(datetime.hour);
   oled.print(':');
-  if (datetime.min<10) {
-    oled.print("0");
-  }
-  oled.print(datetime.min);
+  printWithZero(datetime.min);
 
   oled.set1X();
   oled.setCursor(107, 4);
-  if (datetime.second<10) {
-    oled.print('0');
-  }
-  oled.print(datetime.second);
+  printWithZero(datetime.second);
   
   oled.set1X();
   oled.setCursor(0, 7);

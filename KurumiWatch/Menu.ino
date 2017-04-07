@@ -6,9 +6,9 @@ boolean changed = false;
 #define MARGIN_X 54
 #define ANIMATION_STEPS 9
 
-#define MENU_COUNT 4
+#define MENU_COUNT 5
 #define MENU_TITLE "Setup"
-const char *MENU_SUB_TITLE[MENU_COUNT] = {"BACK", "CONTRAST", "SOUND", "POWER SAVING"};
+const char *MENU_SUB_TITLE[MENU_COUNT] = {"BACK", "CONTRAST", "SOUND", "POWER SAVING", "DATE & TIME"};
 
 void drawMenu(unsigned char key) {
   // return if idle
@@ -36,6 +36,13 @@ void drawMenu(unsigned char key) {
       // Power Saving
       delay_sleep++;
       if (delay_sleep>3) delay_sleep = 0;
+    } else if (cursol == 4) {
+      // Date & Time
+      prev_cursol = -1;
+      oled.clear();
+      mode_current = MODE_SETTIME;
+      rtc_get_time(&datetime);
+      return;
     }
   }
   else if (key == KEY_NEXT) {
@@ -71,7 +78,7 @@ void drawMenu(unsigned char key) {
       x -= dx;
       drawMenuSub(x);
     }
-    delay(200);
+    delay(180);
     prev_cursol = cursol;
   }
   else {
@@ -110,9 +117,4 @@ void drawMenuSub(int x) {
 
 }
 
-void printWithCheckBoundry(int x, String str) {
-  if (x>=0 && x < oled.displayWidth()) {
-    oled.setCol(x);
-    oled.print(str);
-  }
-}
+

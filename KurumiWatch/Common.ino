@@ -25,3 +25,25 @@ void beep(void) {
   }
 }
 
+void printWithCheckBoundry(int x, String str) {
+  if (x>=0 && x < oled.displayWidth()) {
+    oled.setCol(x);
+    oled.print(str);
+  }
+}
+
+void printValueWithCheckBoundry(int x, int val) {
+  if (x>=0 && x < oled.displayWidth()) {
+    oled.setCol(x);
+    printWithZero(val);
+  }
+}
+
+void printWithZero(int v) {
+  if (v<10) {
+    oled.print("0");
+  }
+  oled.print(v);
+}
+
+

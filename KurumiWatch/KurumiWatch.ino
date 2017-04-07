@@ -35,6 +35,7 @@ RTC_TIMETYPE datetime = {15, 12, 31, 2, 23, 59, 30};
 // mode
 #define MODE_TIME 0        // Watch
 #define MODE_MENU 1        // Menu
+#define MODE_SETTIME 2     // Set Time
 uint8_t mode_current = MODE_TIME;
 
 // key code
@@ -80,7 +81,7 @@ void setup() {
   pinMode(KEY_PREV_PIN, INPUT_PULLUP);
   pinMode(KEY_SELECT_PIN, INPUT_PULLUP);
   pinMode(KEY_NEXT_PIN, INPUT_PULLUP);
-  attachInterrupt(0, resume, FALLING);
+  attachInterrupt(1, resume, FALLING);
   attachIntervalTimerHandler(tick_handler);
   
   sleep();
@@ -99,6 +100,8 @@ void loop() {
     drawWatch(key);
   } else if (mode_current == MODE_MENU) {
     drawMenu(key);
+  } else if (mode_current == MODE_SETTIME) {
+    drawSetTime(key);
   }
 
   // sleep if idle
