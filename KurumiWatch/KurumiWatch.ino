@@ -82,7 +82,7 @@ void setup() {
   pinMode(KEY_NEXT_PIN, INPUT_PULLUP);
   attachInterrupt(0, resume, FALLING);
   attachIntervalTimerHandler(tick_handler);
-
+  
   sleep();
 }
 

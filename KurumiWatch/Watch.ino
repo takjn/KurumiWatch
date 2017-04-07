@@ -1,6 +1,8 @@
 const char *DayShortStr[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 const char *MonthShortStr[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+double temperature = getTemperature(TEMP_MODE_CELSIUS);
+
 void drawWatch(unsigned char key) {
   if (key == KEY_SELECT) {
     mode_current = MODE_MENU;
@@ -47,8 +49,9 @@ void drawWatch(unsigned char key) {
   oled.set1X();
   oled.setCursor(0, 7);
   oled.setFont(BM_tube9x8);
-//  oled.print("Watch "); 
-  oled.print(getTemperature(TEMP_MODE_CELSIUS)); 
+  
+  temperature = temperature * 0.95 + getTemperature(TEMP_MODE_CELSIUS) * 0.05;
+  oled.print((int)temperature); 
   oled.print("°C"); 
 }
 
