@@ -24,8 +24,8 @@ const int DISPLAY_CONTRASTS[4] = { 0, 50, 128, 255 };  // 4 steps contrast
 int display_contrast = 3;
 
 // settings for power saving
-const unsigned long DELAY_SLEEPS[4] = {0, 5000, 10000, 30000};  // sleep (millisec, 0=always on)
-int delay_sleep = 2;
+const unsigned long DELAY_SLEEPS[4] = {0, 5000, 10000, 15000};  // sleep (millisec, 0=always on)
+int delay_sleep = 0;
 unsigned long int tick_counter = 0;
 boolean display_power = false;
 
@@ -35,7 +35,7 @@ RTC_TIMETYPE datetime = {15, 12, 31, 2, 23, 59, 30};
 // mode
 #define MODE_TIME 0        // Watch
 #define MODE_MENU 1        // Menu
-#define MODE_SETTIME 2     // Set Time
+#define MODE_SETTIME 2     // Set Date & Time
 uint8_t mode_current = MODE_TIME;
 
 // key code
@@ -81,7 +81,7 @@ void setup() {
   pinMode(KEY_PREV_PIN, INPUT_PULLUP);
   pinMode(KEY_SELECT_PIN, INPUT_PULLUP);
   pinMode(KEY_NEXT_PIN, INPUT_PULLUP);
-  attachInterrupt(1, resume, FALLING);
+  attachInterrupt(0, resume, FALLING);
   attachIntervalTimerHandler(tick_handler);
   
   sleep();

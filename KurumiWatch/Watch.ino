@@ -40,6 +40,7 @@ void drawWatch(unsigned char key) {
   
   temperature = temperature * 0.95 + getTemperature(TEMP_MODE_CELSIUS) * 0.05;
   oled.print((int)temperature); 
-  oled.print("°C"); 
+  oled.write(132);
+  oled.write('C');
 }
 

@@ -130,7 +130,7 @@ void drawSetTime(unsigned char key) {
   oled.setCol(19);
   oled.print("(");
   
-  oled.setCol(89);
+  oled.setCol(94);
   oled.print(")");
   
 }
@@ -143,8 +143,7 @@ void drawSetTimeSub(int x) {
   printValueWithCheckBoundry(x + SETTIME_MARGIN_X * 2, datetime.day);
   printValueWithCheckBoundry(x + SETTIME_MARGIN_X * 3, datetime.hour);
   printValueWithCheckBoundry(x + SETTIME_MARGIN_X * 4, datetime.min);
-  printWithCheckBoundry(x + 10 + SETTIME_MARGIN_X * 5, "{");
-  printWithCheckBoundry(x + 5 + SETTIME_MARGIN_X * 6, "{");
+  printWithCheckBoundry(x + 10 + SETTIME_MARGIN_X * 5, "+");
+  printWithCheckBoundry(x + 10 + SETTIME_MARGIN_X * 6, "-");
 }
-
 

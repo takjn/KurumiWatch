@@ -114,6 +114,7 @@ void drawMenuSub(int x) {
   printWithCheckBoundry(x + MARGIN_X * 1, "|");
   printWithCheckBoundry(x + MARGIN_X * 2, "}");
   printWithCheckBoundry(x + MARGIN_X * 3, "~");
+  printWithCheckBoundry(x + MARGIN_X * 4, "@");
 
 }
 
