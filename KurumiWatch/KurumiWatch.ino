@@ -10,10 +10,9 @@ SSD1306AsciiWire oled;
 
 // settings for I/O pins
 #define BUZZER_PIN      10          // pin for buzzer
-#define KEY_PREV_PIN    2           // pin for previous button
+#define KEY_PREV_PIN    4           // pin for previous button
 #define KEY_SELECT_PIN  3           // pin for select button
-#define KEY_NEXT_PIN    4           // pin for next button
-#define BATTERY_CHECK   A0          // pin for battery voltage
+#define KEY_NEXT_PIN    2           // pin for next button
 
 // settings for buzzer
 const uint8_t BUZZER_VOLUMES[4] = { 0, 1, 5, 15 };  // 4 steps volume (0=silence)
@@ -25,7 +24,7 @@ int display_contrast = 3;
 
 // settings for power saving
 const unsigned long DELAY_SLEEPS[4] = {0, 5000, 10000, 15000};  // sleep (millisec, 0=always on)
-int delay_sleep = 0;
+int delay_sleep = 1;
 unsigned long int tick_counter = 0;
 boolean display_power = false;
 

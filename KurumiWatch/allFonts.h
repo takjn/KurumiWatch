@@ -103,8 +103,6 @@
 //#include "utf8font10x16.h"	// UTF8 font up to U+00FF
 //				// http://www.fileformat.info/info/charset/UTF-8/list.htm
 
-#include "TomThumbs3x6.h"
-#include "lcdnums12x16.h"	// font that looks like LCD digits
 #include "BM_tube9x8.h"
 
 #endif
