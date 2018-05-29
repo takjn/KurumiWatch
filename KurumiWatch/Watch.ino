@@ -42,5 +42,9 @@ void drawWatch(unsigned char key) {
   oled.print((int)temperature); 
   oled.write(132);
   oled.write('C');
+  
+  oled.setCursor(79, 7);
+  oled.print(voltage);
+  oled.write('V');
 }
 

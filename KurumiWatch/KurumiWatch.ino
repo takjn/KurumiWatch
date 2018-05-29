@@ -13,6 +13,8 @@ SSD1306AsciiWire oled;
 #define KEY_PREV_PIN    4           // pin for previous button
 #define KEY_SELECT_PIN  3           // pin for select button
 #define KEY_NEXT_PIN    2           // pin for next button
+#define VOLTAGE_OUT_PIN 7           // pin for voltage measurement
+#define VOLTAGE_CHK_PIN A0          // pin for voltage measurement
 
 // settings for buzzer
 const uint8_t BUZZER_VOLUMES[4] = { 0, 1, 5, 15 };  // 4 steps volume (0=silence)
@@ -30,6 +32,7 @@ boolean display_power = false;
 
 // variables for watch
 RTC_TIMETYPE datetime = {15, 12, 31, 2, 23, 59, 30};
+float voltage = 0;
 
 // mode
 #define MODE_TIME 0        // Watch
@@ -53,6 +56,7 @@ void sleep() {
 
 void resume() {
   tick_counter = 0;
+  voltage = getVoltage();
 }
 
 void tick_handler(unsigned long u32ms)
@@ -61,8 +65,8 @@ void tick_handler(unsigned long u32ms)
 }
 
 void setup() {
-  pinMode(24, OUTPUT); //blue led
-  digitalWrite(24, HIGH);
+//  pinMode(24, OUTPUT); //blue led
+//  digitalWrite(24, HIGH);
   
   // initialize RTC
   rtc_init();
@@ -75,6 +79,11 @@ void setup() {
   oled.setContrast(DISPLAY_CONTRASTS[display_contrast]);
   oled.clear();
 
+  // setup for voltage measurement
+  analogReference(INTERNAL);
+  pinMode(VOLTAGE_OUT_PIN, OUTPUT);
+  pinMode(VOLTAGE_CHK_PIN, INPUT);
+  
   // setup for the power management
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(KEY_PREV_PIN, INPUT_PULLUP);
@@ -82,7 +91,7 @@ void setup() {
   pinMode(KEY_NEXT_PIN, INPUT_PULLUP);
   attachInterrupt(0, resume, FALLING);
   attachIntervalTimerHandler(tick_handler);
-  
+
   sleep();
 }
 
