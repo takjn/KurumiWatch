@@ -13,7 +13,7 @@ SSD1306AsciiWire oled;
 #define KEY_PREV_PIN    4           // pin for previous button
 #define KEY_SELECT_PIN  3           // pin for select button
 #define KEY_NEXT_PIN    2           // pin for next button
-#define VOLTAGE_OUT_PIN 7           // pin for voltage measurement
+#define VOLTAGE_OUT_PIN A7          // pin for voltage measurement
 #define VOLTAGE_CHK_PIN A0          // pin for voltage measurement
 
 // settings for buzzer
